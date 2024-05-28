@@ -37,7 +37,6 @@ start_tls: build
 
 build_all: test clean
 	@echo "Building everything..."
-	mkdir dist
 	@for OS in $(XC_OS); do \
 		for ARCH in $(XC_ARCH); do \
 			[ $$OS = "windows" ] && [ $$ARCH = "arm64" ] && continue; \
@@ -46,7 +45,7 @@ build_all: test clean
 			CGO_ENABLED=0 \
 			GOOS=$$OS \
 			GOARCH=$$ARCH \
-			[ $$ARCH = "arm" ] && GOARM=6 \
+			GOARM=6 \
 			go build -ldflags="-s -w" -trimpath \
 			-o=$(BIN)/$(BINARY_NAME)-$$OS-$$ARCH/$(BINARY_NAME) ./app; \
 			[ $$OS = "windows" ] && (cd $(BIN); mv $(BINARY_NAME)-$$OS-$$ARCH/$(BINARY_NAME) $(BINARY_NAME)-$$OS-$$ARCH/$(BINARY_NAME).exe; zip -r $(BINARY_NAME)-$$OS-$$ARCH.zip $(BINARY_NAME)-$$OS-$$ARCH; cd ../) \
