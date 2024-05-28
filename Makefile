@@ -45,7 +45,7 @@ build_all: test clean
 			CGO_ENABLED=0 \
 			GOOS=$$OS \
 			GOARCH=$$ARCH \
-			[ $$ARCH = "arm" ] && GOARM=6 \
+			[ $$ARCH = "arm" ] && GOARM=6 \ ||  \
 			go build -ldflags="-s -w" -trimpath \
 			-o=$(BIN)/$(BINARY_NAME)-$$OS-$$ARCH/$(BINARY_NAME) ./app; \
 			[ $$OS = "windows" ] && (cd $(BIN); mv $(BINARY_NAME)-$$OS-$$ARCH/$(BINARY_NAME) $(BINARY_NAME)-$$OS-$$ARCH/$(BINARY_NAME).exe; zip -r $(BINARY_NAME)-$$OS-$$ARCH.zip $(BINARY_NAME)-$$OS-$$ARCH; cd ../) \
