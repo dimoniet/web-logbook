@@ -37,6 +37,7 @@ start_tls: build
 
 build_all: test clean
 	@echo "Building everything..."
+	mkdir dist
 	@for OS in $(XC_OS); do \
 		for ARCH in $(XC_ARCH); do \
 			[ $$OS = "windows" ] && [ $$ARCH = "arm64" ] && continue; \
